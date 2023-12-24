@@ -18,9 +18,10 @@ public class MainActivity extends AppCompatActivity {
 
     BottomNavigationView bottomNavigationView;
 
-    public static final int ACTION_HOME = R.id.action_home;
-    public static final int ACTION_DASHBOARD = R.id.action_dashboard;
-    public static final int ACTION_ABOUT = R.id.action_about_us;
+    public static final int ACTION_DASHBOARD = R.id.dashboard;
+    public static final int ACTION_MEMBER = R.id.members;
+    public static final int ACTION_BOOKS = R.id.books;
+    public static final int ACTION_LOANS = R.id.loans;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,15 +36,18 @@ public class MainActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 Fragment selectedFragment = null;
 
-                if (item.getItemId() == ACTION_HOME) {
-                    selectedFragment = new HomeFragment();
-                } else if (item.getItemId() == ACTION_DASHBOARD) {
-                    selectedFragment = new DashboardFragment();
-                } else if (item.getItemId() == ACTION_ABOUT) {
-                    selectedFragment = new AboutUsFragment();
+                if (item.getItemId() == ACTION_DASHBOARD) {
+                    selectedFragment = new DashboaardFragment();
+                } else if (item.getItemId() == ACTION_MEMBER) {
+                    selectedFragment = new MembersFragment();
+                } else if (item.getItemId() == ACTION_BOOKS) {
+                    selectedFragment = new BooksFragment();
+                } else if (item.getItemId() == ACTION_LOANS) {
+                    selectedFragment = new LoansFragment();
                 } else {
                     return false;
                 }
+
                 if (selectedFragment != null) {
                     getSupportFragmentManager().beginTransaction()
                             .replace(R.id.frame_layout, selectedFragment)
