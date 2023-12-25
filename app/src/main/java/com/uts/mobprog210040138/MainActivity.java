@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
         bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                Fragment selectedFragment = null;
+                Fragment selectedFragment = new DashboaardFragment();
 
                 if (item.getItemId() == ACTION_DASHBOARD) {
                     selectedFragment = new DashboaardFragment();
@@ -58,5 +58,8 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+
+        //halaman default sebelum memilih bottom navbar
+        bottomNavigationView.setSelectedItemId(ACTION_DASHBOARD);
     }
 }
