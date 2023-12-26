@@ -14,23 +14,22 @@
 
         <SearchView
             android:id="@+id/searchView2"
-            android:layout_width="0dp"
+            android:layout_width="345dp"
             android:layout_height="50dp"
-            android:layout_marginTop="60dp"
+            android:layout_marginTop="20dp"
             android:layout_marginEnd="10dp"
             android:background="@drawable/search_rounded"
             android:iconifiedByDefault="false"
             android:queryBackground="@android:color/transparent"
-            android:queryHint="Search title or ISBN..."
+            android:queryHint="Type title or ISBN..."
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageButton
             android:id="@+id/imageButton4"
-            android:layout_width="57dp"
+            android:layout_width="48dp"
             android:layout_height="48dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="60dp"
+            android:layout_marginTop="20dp"
             android:contentDescription="test"
             android:src="@drawable/baseline_arrow_back_24"
             app:layout_constraintEnd_toStartOf="@+id/searchView2"
