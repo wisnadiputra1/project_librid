@@ -11,11 +11,10 @@ import android.widget.ImageButton;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link DashboaardFragment#newInstance} factory method to
+ * Use the {@link SearchListFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-
-public class DashboaardFragment extends Fragment {
+public class SearchListFragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -26,9 +25,7 @@ public class DashboaardFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-
-
-    public DashboaardFragment() {
+    public SearchListFragment() {
         // Required empty public constructor
     }
 
@@ -38,11 +35,11 @@ public class DashboaardFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment DashboaardFragment.
+     * @return A new instance of fragment SearchListFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static DashboaardFragment newInstance(String param1, String param2) {
-        DashboaardFragment fragment = new DashboaardFragment();
+    public static SearchListFragment newInstance(String param1, String param2) {
+        SearchListFragment fragment = new SearchListFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -60,24 +57,26 @@ public class DashboaardFragment extends Fragment {
     }
 
 
+
     ImageButton imageButton;
-
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_dashboaard, container, false);
+        View view = inflater.inflate(R.layout.fragment_search_list, container, false);
+
+
 
         // Temukan ImageButton dari layout
-        imageButton = view.findViewById(R.id.imageButton3);
+        imageButton = view.findViewById(R.id.imageButton4);
 
         // Tambahkan event listener untuk ImageButton
         imageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // Kode yang akan dijalankan ketika ImageButton diklik
                 // Panggil metode atau tindakan untuk membuka SearchListFragment
-                openSearchListFragment();
+                openDashboardFragment();
             }
         });
 
@@ -85,15 +84,14 @@ public class DashboaardFragment extends Fragment {
     }
 
     // Metode untuk membuka SearchListFragment
-    private void openSearchListFragment() {
+    private void openDashboardFragment() {
         // Buat instance dari SearchListFragment
-        SearchListFragment searchListFragment = new SearchListFragment();
+        DashboaardFragment dashboaardFragment = new DashboaardFragment();
 
         // Ganti fragment di dalam container (contoh: menggunakan R.id.fragment_container)
         getParentFragmentManager().beginTransaction()
-                .replace(R.id.fragment_search, searchListFragment)
+                .replace(R.id.dashboard_fragment, dashboaardFragment)
                 .addToBackStack(null)
                 .commit();
     }
-
 }
