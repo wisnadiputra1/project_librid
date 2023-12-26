@@ -7,7 +7,9 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.SearchView;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -93,5 +95,26 @@ public class SearchListFragment extends Fragment {
                 .replace(R.id.fragment_search, dashboaardFragment)
                 .addToBackStack(null)
                 .commit();
+    }
+
+    private SearchView searchView;
+    private void searchBook() {
+       searchView = searchView.findViewById(R.id.searchView2);
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String s) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String s) {
+
+
+                return false;
+            }
+        });
+
+
     }
 }
