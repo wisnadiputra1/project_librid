@@ -69,6 +69,8 @@ public class DashboaardFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_dashboaard, container, false);
 
+        //ini buat pindah ke search
+
         // Temukan ImageButton dari layout
         imageButton = view.findViewById(R.id.imageButton3);
 
@@ -91,7 +93,7 @@ public class DashboaardFragment extends Fragment {
 
         // Ganti fragment di dalam container (contoh: menggunakan R.id.fragment_container)
         getParentFragmentManager().beginTransaction()
-                .replace(R.id.fragment_search, searchListFragment)
+                .replace(R.id.dashboard_fragment, searchListFragment)
                 .addToBackStack(null)
                 .commit();
     }

@@ -197,6 +197,7 @@
             android:layout_marginRight="10dp"
             android:background="@drawable/search_rounded"
             android:contentDescription="text"
+            android:scaleType="center"
             android:src="@drawable/search"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
