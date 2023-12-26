@@ -90,7 +90,7 @@ public class SearchListFragment extends Fragment {
 
         // Ganti fragment di dalam container (contoh: menggunakan R.id.fragment_container)
         getParentFragmentManager().beginTransaction()
-                .replace(R.id.dashboard_fragment, dashboaardFragment)
+                .replace(R.id.fragment_search, dashboaardFragment)
                 .addToBackStack(null)
                 .commit();
     }
