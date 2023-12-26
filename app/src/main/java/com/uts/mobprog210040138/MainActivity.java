@@ -10,6 +10,7 @@ import com.google.android.material.navigation.NavigationBarView;
 
 import android.view.MenuItem;
 
+
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
@@ -30,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
 
         // Inisialisasi bottomNavigationView
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
+
 
         bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
