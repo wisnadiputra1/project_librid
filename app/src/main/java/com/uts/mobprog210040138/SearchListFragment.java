@@ -65,7 +65,7 @@ public class SearchListFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_search_list, container, false);
 
-
+        //ini buat pindah ke dashboard
 
         // Temukan ImageButton dari layout
         imageButton = view.findViewById(R.id.imageButton4);

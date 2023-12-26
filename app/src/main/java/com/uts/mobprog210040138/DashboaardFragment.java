@@ -69,6 +69,8 @@ public class DashboaardFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_dashboaard, container, false);
 
+        //ini buat pindah ke search
+
         // Temukan ImageButton dari layout
         imageButton = view.findViewById(R.id.imageButton3);
 
