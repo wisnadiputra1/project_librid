@@ -21,6 +21,7 @@
             android:text="List Of Members"
             android:textColor="#000000"
             android:textSize="20dp"
+            android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@+id/searchView"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -31,7 +32,7 @@
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:layout_marginStart="10dp"
-            android:layout_marginTop="72dp"
+            android:layout_marginTop="22dp"
             android:layout_marginEnd="10dp"
             android:background="@drawable/search_rounded"
             android:elevation="10dp"
@@ -41,28 +42,34 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/button3" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView2"
-            android:layout_width="393dp"
-            android:layout_height="556dp"
+            android:layout_width="385dp"
+            android:layout_height="521dp"
             android:layout_marginStart="8dp"
+            android:layout_marginTop="22dp"
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="1dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txtJumlahMember" />
 
         <Button
             android:id="@+id/button3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="10dp"
             android:backgroundTint="#2A810C"
-            android:text="+ Add Member"
             android:elevation="10dp"
+            android:paddingLeft="12dp"
+            android:paddingTop="10dp"
+            android:paddingRight="12dp"
+            android:paddingBottom="10dp"
+            android:text="+ Add Member"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -71,12 +78,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="17dp"
-            android:layout_marginBottom="16dp"
+            android:layout_marginTop="22dp"
             android:fontFamily="@font/roboto_medium"
             android:text="TextView"
             android:textSize="14sp"
-            app:layout_constraintBottom_toTopOf="@+id/recyclerView2"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/searchView" />
     </androidx.constraintlayout.widget.ConstraintLayout>
