@@ -5,11 +5,13 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import java.util.List;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 import com.uts.mobprog210040138.models.ModelLoans;
 
@@ -36,12 +38,14 @@ public class RecyclerViewCustomeAdapterLoans extends RecyclerView.Adapter<Recycl
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         public TextView txtTitle, txtUsername, txtBorrowerAt;
+        public Button btnReturn;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             txtTitle = itemView.findViewById(R.id.txtTitleBook);
-            txtUsername = itemView.findViewById(R.id.txtUsername);
+            txtUsername = itemView.findViewById(R.id.txtUsernameBorrower);
             txtBorrowerAt = itemView.findViewById(R.id.txtBorrowedAt);
+            btnReturn = itemView.findViewById(R.id.btnReturn);
             itemView.setOnClickListener(this);
         }
 
@@ -53,16 +57,28 @@ public class RecyclerViewCustomeAdapterLoans extends RecyclerView.Adapter<Recycl
     @Override
     public RecyclerViewCustomeAdapterLoans.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        View v = inflater.inflate(R.layout.fragment_list_data_loans, parent, false);
+        View v = inflater.inflate(R.layout.list_data_loans, parent, false);
 
         return new ViewHolder(v);
     }
 
-    //belummmm
     @Override
     public void onBindViewHolder(@NonNull RecyclerViewCustomeAdapterLoans.ViewHolder holder, int position) {
         ModelLoans loans = data.get(position);
-        //belum
+        holder.txtTitle.setText(loans.getBook().getTitle());
+        holder.txtUsername.setText(loans.getBorrower().getUsername());
+        holder.txtBorrowerAt.setText(loans.getBorrowedAt());
+        if(!loans.getReturnStatus().equals("NOT_YET_RETURNED")) {
+            holder.btnReturn.setText("Return");
+        } else {
+            if(loans.getReturnStatus().equals("RETURNED")) {
+                holder.btnReturn.setText("✓ Returned");
+            } else {
+                holder.btnReturn.setText("✓ Returned late");
+            }
+            holder.btnReturn.setEnabled(false);
+            holder.btnReturn.setBackgroundTintList(ContextCompat.getColorStateList(ctx, R.color.white));
+        }
     }
     @Override
     public int getItemCount() { return data.size(); }

@@ -2,6 +2,7 @@ package com.uts.mobprog210040138;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.os.Bundle;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -16,7 +17,7 @@ import androidx.fragment.app.Fragment;
 
 
 public class MainActivity extends AppCompatActivity {
-
+    Context ctx;
     BottomNavigationView bottomNavigationView;
 
     public static final int ACTION_DASHBOARD = R.id.dashboard;
@@ -31,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
 
         // Inisialisasi bottomNavigationView
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
-
+        ctx = this;
 
         bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
