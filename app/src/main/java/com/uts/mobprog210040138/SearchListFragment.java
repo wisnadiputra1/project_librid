@@ -1,15 +1,29 @@
 package com.uts.mobprog210040138;
 
+import android.content.Context;
 import android.os.Bundle;
-
+import android.text.TextUtils;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.SearchView;
+import android.widget.Toast;
+
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.uts.mobprog210040138.models.ModelAPIResBook;
+import com.uts.mobprog210040138.models.ModelBook;
+
+import java.util.List;
+import java.util.ArrayList;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -26,6 +40,17 @@ public class SearchListFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+    //Variabel buku
+    private List<ModelBook> data2;
+    private RecyclerView recyclerSearch;
+    private RecycleViewSearchAdapter searchAdapter;
+    private ModelAPIResBook result;
+    private Context ctx;
+    private View view;
+    private SearchView searchView;
+    private List<ModelBook> allBooks = new ArrayList<>(); // Declare and initialize the list
+    private List<ModelBook> filteredBooks = new ArrayList<>(); // Declare and initialize the filtered list
 
     public SearchListFragment() {
         // Required empty public constructor
@@ -56,6 +81,8 @@ public class SearchListFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
+
     }
 
 
@@ -71,7 +98,13 @@ public class SearchListFragment extends Fragment {
 
         // Temukan ImageButton dari layout
         imageButton = view.findViewById(R.id.imageButton4);
-
+        //Inisialisasi id recyclerView dashboard
+        recyclerSearch = view.findViewById(R.id.recyclerSearch);
+        searchView = view.findViewById(R.id.SearchDashboard);
+        //Mengatur data yang akan ditampilkan
+        LinearLayoutManager manager = new LinearLayoutManager(ctx);
+        recyclerSearch.setLayoutManager(manager);
+        recyclerSearch.setHasFixedSize(true);
         // Tambahkan event listener untuk ImageButton
         imageButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -81,6 +114,13 @@ public class SearchListFragment extends Fragment {
                 openDashboardFragment();
             }
         });
+
+
+        // Call searchBook() to set up search functionality
+        searchBook();
+
+        // Call searchData() to populate RecyclerView with data
+        searchData();
 
         return view;
     }
@@ -97,24 +137,74 @@ public class SearchListFragment extends Fragment {
                 .commit();
     }
 
-    private SearchView searchView;
-    private void searchBook() {
-       searchView = searchView.findViewById(R.id.searchView2);
 
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+    private void searchBook() {
+
+        if (searchView != null) {
+            searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+                @Override
+                public boolean onQueryTextSubmit(String s) {
+                    filterBook(s);
+                    return false;
+                }
+
+                @Override
+                public boolean onQueryTextChange(String s) {
+                    filterBook(s);
+                    return true;
+                }
+            });
+        }
+
+
+    }
+
+    ApiInterfaceBook apiServices = APIClient.getClient().create(ApiInterfaceBook.class);
+
+    public void searchData() {
+        Call<ModelAPIResBook> getDataBooks = apiServices.getAllBook();
+
+        getDataBooks.enqueue(new Callback<ModelAPIResBook>() {
             @Override
-            public boolean onQueryTextSubmit(String s) {
-                return false;
+            public void onResponse(Call<ModelAPIResBook> call, Response<ModelAPIResBook> response) {
+                if(response.code() != 200) {
+                    Toast.makeText(getContext(), "code" + response.code(), Toast.LENGTH_SHORT).show();
+                }else{
+                    if (response.body() == null) {
+
+                    }else {
+                        result = response.body();
+                        data2 = result.getData();
+                        searchAdapter = new RecycleViewSearchAdapter(ctx, data2);
+                        recyclerSearch.setAdapter(searchAdapter);
+                        searchAdapter.notifyDataSetChanged();
+                    }
+                }
             }
 
             @Override
-            public boolean onQueryTextChange(String s) {
+            public void onFailure(Call<ModelAPIResBook> call, Throwable t) {
 
-
-                return false;
             }
         });
+    }
 
+    private void filterBook(String query) {
+        filteredBooks.clear();
 
+        if (TextUtils.isEmpty(query)) {
+            filteredBooks.addAll(data2);
+        } else {
+            query = query.toLowerCase().trim();
+
+            for (ModelBook book : data2) {
+                if (book.getTitle().toLowerCase().contains(query)) {
+                    filteredBooks.add(book);
+                }
+            }
+        }
+
+        // Update the UI with the filtered list of books
+        searchAdapter.notifyDataSetChanged();
     }
 }
